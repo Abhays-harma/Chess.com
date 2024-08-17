@@ -5,6 +5,7 @@ const socket=require('socket.io');
 const path = require('path');
 
 const chess=new Chess();
+require('dotenv').config();
 
 const app=express();
 
@@ -13,6 +14,8 @@ const io=socket(server);
 
 const players={};
 let currentPlayer="ws";
+
+const PORT=process.env.PORT || 4000;
 
 app.set("view engine","ejs");
 app.use(express.static(path.join(__dirname,"public")));
@@ -77,7 +80,7 @@ io.on("connection",(uniquesocket)=>{
     })
 })
 
-server.listen(3000,()=>{
-    console.log("Server running at 3000 port");
+server.listen(PORT,()=>{
+    console.log(`Server running at port :${PORT}`);
     
 })
